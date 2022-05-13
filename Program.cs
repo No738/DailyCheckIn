@@ -9,7 +9,7 @@ namespace GenshinCheckIn
             BuildLogger();
             Log.Information("Starting a Genshin Impact auto daily check-in tool...");
 
-            // There is must be MihoyoAccounts initialization
+            new DailyCheckIn().Run();
         }
 
         private static void BuildLogger()

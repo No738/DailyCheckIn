@@ -11,7 +11,9 @@ namespace GenshinCheckIn
             _authenticationData = authenticationData;
         }
 
-        public static MihoyoAccount? CreateInstance(string rawCookies)
+        public string UserAgent { get; set; }
+
+        public static MihoyoAccount? CreateInstance(string rawCookies, string userAgent = "")
         {
             Log.Debug("Creating new instance of MihoyoAccount.\n" +
                       $"Raw cookie data: {rawCookies}");
@@ -25,27 +27,32 @@ namespace GenshinCheckIn
                 return null;
             }
 
-            var account = new MihoyoAccount(authenticationData);
+            var account = new MihoyoAccount(authenticationData)
+            {
+                UserAgent = userAgent
+            };
 
             if (account.TryGetAccountInfo() == false)
             {
                 Log.Debug("Failed to parse account data");
+
                 return null;
             }
+
+            new ClaimRewardRequest(authenticationData, account.UserAgent).TrySend(out string result);
+            Log.Debug($"Current reward request result: {result}");
 
             return account;
         }
 
         private bool TryGetAccountInfo()
         {
-            if (new AccountInfoRequest(_authenticationData,
-                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0")
+            if (new AccountInfoRequest(_authenticationData, UserAgent)
                     .TrySend(out string result) == false)
             {
                 return false;
             }
-
-            Log.Information(result);
+            
             return true;
         }
     }
