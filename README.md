@@ -1,5 +1,6 @@
 # Genshin Impact automated Daily Check-in in HoYoLAB
-This software allows you to automatically check in HoYoLAB daily, and also provides a wide range of functionality for receiving and processing information.
+This software allows you to automatically check-in and get daily rewards in Genshin Impact.<br/>
+Also provides a wide range of functionality for receiving and processing information by API.
 
 Now in **active development** and is not yet usable. 
 
