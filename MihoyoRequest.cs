@@ -17,7 +17,7 @@ namespace GenshinCheckIn
             _userAgent = userAgent;
         }
 
-        protected abstract HttpRequestMessage BuildRequestMessage();
+        protected abstract HttpRequestMessage RequestMessage { get; }
 
         public bool TrySend(out string result)
         {
@@ -28,7 +28,7 @@ namespace GenshinCheckIn
                 CookieContainer = BuildCookieContainer()
             });
 
-            HttpRequestMessage requestMessage = BuildRequestMessage();
+            HttpRequestMessage requestMessage = RequestMessage;
 
             if (requestMessage.RequestUri == null)
             {

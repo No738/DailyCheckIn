@@ -47,13 +47,8 @@ namespace GenshinCheckIn
 
         private bool TryGetAccountInfo()
         {
-            if (new AccountInfoRequest(_authenticationData, UserAgent)
-                    .TrySend(out string result) == false)
-            {
-                return false;
-            }
-            
-            return true;
+            return new AccountInfoRequest(_authenticationData, UserAgent)
+                .TrySend(out string result);
         }
     }
 }

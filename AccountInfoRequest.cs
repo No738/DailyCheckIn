@@ -8,11 +8,14 @@ namespace GenshinCheckIn
 
         public AccountInfoRequest(AuthenticationData authenticationData, string userAgent) : base(authenticationData, userAgent) { }
 
-        protected override HttpRequestMessage BuildRequestMessage()
+        protected override HttpRequestMessage RequestMessage
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{AccountInfoUrl}?{AdditionalMetaParameters}");
+            get
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{AccountInfoUrl}?{AdditionalMetaParameters}");
 
-            return requestMessage;
+                return requestMessage;
+            }
         }
     }
 }
