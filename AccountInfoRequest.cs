@@ -6,16 +6,13 @@ namespace GenshinCheckIn
     {
         private static readonly string AccountInfoUrl = "https://api-os-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie";
 
-        public AccountInfoRequest(AuthenticationData authenticationData, string userAgent) : base(authenticationData, userAgent) { }
-
-        protected override HttpRequestMessage RequestMessage
+        public AccountInfoRequest(AuthenticationData authenticationData, string userAgent) : base(authenticationData,
+            userAgent)
         {
-            get
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{AccountInfoUrl}?{AdditionalMetaParameters}");
-
-                return requestMessage;
-            }
+            RequestMessage = new HttpRequestMessage(HttpMethod.Get, 
+                $"{AccountInfoUrl}?{AdditionalMetaParameters}");
         }
+
+        protected override HttpRequestMessage RequestMessage { get; }
     }
 }

@@ -28,28 +28,26 @@ namespace GenshinCheckIn
                 CookieContainer = BuildCookieContainer()
             });
 
-            HttpRequestMessage requestMessage = RequestMessage;
-
-            if (requestMessage.RequestUri == null)
+            if (RequestMessage.RequestUri == null)
             {
                 Log.Fatal("Request message URI is null!");
 
-                throw new ArgumentNullException(nameof(requestMessage.RequestUri), "Request message URI is null!");
+                throw new ArgumentNullException(nameof(RequestMessage.RequestUri), "Request message URI is null!");
             }
 
             if (_userAgent != string.Empty)
             {
-                requestMessage.Headers.Add("User-Agent", _userAgent);
+                RequestMessage.Headers.Add("User-Agent", _userAgent);
             }
 
-            requestMessage.Headers.Add("Accept", "*/*");
-            requestMessage.Headers.Add("Host", requestMessage.RequestUri.Host);
-            requestMessage.Headers.Add("Accept-Encoding", "br");
-            requestMessage.Headers.Add("Connection", "keep-alive");
+            RequestMessage.Headers.Add("Accept", "*/*");
+            RequestMessage.Headers.Add("Host", RequestMessage.RequestUri.Host);
+            RequestMessage.Headers.Add("Accept-Encoding", "br");
+            RequestMessage.Headers.Add("Connection", "keep-alive");
 
             try
             {
-                HttpResponseMessage responseMessage = client.SendAsync(requestMessage).Result;
+                HttpResponseMessage responseMessage = client.SendAsync(RequestMessage).Result;
                 result = responseMessage.Content.ReadAsStringAsync().Result;
             }
             catch(Exception ex)

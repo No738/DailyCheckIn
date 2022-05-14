@@ -6,9 +6,10 @@ namespace GenshinCheckIn
     {
         private readonly AuthenticationData _authenticationData;
 
-        private MihoyoAccount(AuthenticationData authenticationData)
+        private MihoyoAccount(AuthenticationData authenticationData, string userAgent)
         {
             _authenticationData = authenticationData;
+            UserAgent = userAgent;
         }
 
         public string UserAgent { get; set; }
@@ -27,10 +28,7 @@ namespace GenshinCheckIn
                 return null;
             }
 
-            var account = new MihoyoAccount(authenticationData)
-            {
-                UserAgent = userAgent
-            };
+            var account = new MihoyoAccount(authenticationData, userAgent);
 
             if (account.TryGetAccountInfo() == false)
             {

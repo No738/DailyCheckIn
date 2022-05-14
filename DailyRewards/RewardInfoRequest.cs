@@ -6,16 +6,13 @@ namespace GenshinCheckIn
     {
         private static readonly string AccountInfoUrl = "https://hk4e-api-os.mihoyo.com/event/sol/info";
 
-        public RewardInfoRequest(AuthenticationData authenticationData, string userAgent) : base(authenticationData, userAgent) { }
-
-        protected override HttpRequestMessage RequestMessage
+        public RewardInfoRequest(AuthenticationData authenticationData, string userAgent) : base(authenticationData,
+            userAgent)
         {
-            get
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{AccountInfoUrl}?act_id=e202102251931481&{AdditionalMetaParameters}");
-
-                return requestMessage;
-            }
+            RequestMessage = new HttpRequestMessage(HttpMethod.Get,
+                $"{AccountInfoUrl}?act_id=e202102251931481&{AdditionalMetaParameters}");
         }
+
+        protected override HttpRequestMessage RequestMessage { get; }
     }
 }
