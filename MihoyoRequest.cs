@@ -23,11 +23,34 @@ namespace GenshinCheckIn
         {
             Log.Debug("Sending request to Mihoyo...");
 
-            using var client = new HttpClient(new HttpClientHandler
-            {
-                CookieContainer = BuildCookieContainer()
-            });
+            AddRequestHeaders();
 
+            try
+            {
+                using var client = new HttpClient(new HttpClientHandler
+                {
+                    CookieContainer = BuildCookieContainer()
+                });
+
+                HttpResponseMessage responseMessage = client.SendAsync(RequestMessage).Result;
+                result = responseMessage.Content.ReadAsStringAsync().Result;
+
+                Log.Debug($"Received response: {result}");
+            }
+            catch(Exception ex)
+            {
+                Log.Error("Failed to send https request!\n" +
+                          $"Exception: {ex}");
+                result = string.Empty;
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private void AddRequestHeaders()
+        {
             if (RequestMessage.RequestUri == null)
             {
                 Log.Fatal("Request message URI is null!");
@@ -44,23 +67,6 @@ namespace GenshinCheckIn
             RequestMessage.Headers.Add("Host", RequestMessage.RequestUri.Host);
             RequestMessage.Headers.Add("Accept-Encoding", "br");
             RequestMessage.Headers.Add("Connection", "keep-alive");
-
-            try
-            {
-                HttpResponseMessage responseMessage = client.SendAsync(RequestMessage).Result;
-                result = responseMessage.Content.ReadAsStringAsync().Result;
-            }
-            catch(Exception ex)
-            {
-                Log.Error("Failed to send https request!\n" +
-                          $"Exception: {ex}");
-
-                result = string.Empty;
-                return false;
-            }
-
-            Log.Debug($"Received response: {result}");
-            return true;
         }
 
         private CookieContainer BuildCookieContainer()
