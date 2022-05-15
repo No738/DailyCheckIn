@@ -2,7 +2,7 @@
 
 namespace GenshinCheckIn
 {
-    public sealed class ClaimRewardRequest : MihoyoRequest
+    public sealed class ClaimRewardRequest : MihoyoHttpRequest
     {
         private static readonly string AccountInfoUrl = "https://hk4e-api-os.mihoyo.com/event/sol/sign";
 

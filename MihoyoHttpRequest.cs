@@ -3,7 +3,7 @@ using Serilog;
 
 namespace GenshinCheckIn
 {
-    public abstract class MihoyoRequest
+    public abstract class MihoyoHttpRequest
     {
         private readonly AuthenticationData _authenticationData;
         private readonly string _userAgent;
@@ -11,7 +11,7 @@ namespace GenshinCheckIn
         protected readonly string AdditionalMetaParameters =
             "mhy_auth_required=true&mhy_presentation_style=fullscreen&utm_source=tools&lang=ru-ru&bbs_theme=dark&bbs_theme_device=1";
 
-        protected MihoyoRequest(AuthenticationData authenticationData, string userAgent)
+        protected MihoyoHttpRequest(AuthenticationData authenticationData, string userAgent)
         {
             _authenticationData = authenticationData;
             _userAgent = userAgent;

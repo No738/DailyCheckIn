@@ -37,8 +37,11 @@ namespace GenshinCheckIn
                 return null;
             }
 
-            new ClaimRewardRequest(authenticationData, account.UserAgent).TrySend(out string result);
-            Log.Debug($"Current reward request result: {result}");
+            new RewardInfoRequest(authenticationData, account.UserAgent).TrySend(out string result1);
+            Log.Debug($"Current reward info result: {result1}");
+
+            new ClaimRewardRequest(authenticationData, account.UserAgent).TrySend(out string result2);
+            Log.Debug($"Current reward request result: {result2}");
 
             return account;
         }

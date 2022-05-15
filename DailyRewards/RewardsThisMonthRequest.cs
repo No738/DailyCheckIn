@@ -2,7 +2,7 @@
 
 namespace GenshinCheckIn
 {
-    public sealed class RewardsThisMonthRequest : MihoyoRequest
+    public sealed class RewardsThisMonthRequest : MihoyoHttpRequest
     {
         private static readonly string AccountInfoUrl = "https://sg-hk4e-api.hoyolab.com/event/sol/home";
 

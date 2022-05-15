@@ -2,7 +2,7 @@
 
 namespace GenshinCheckIn
 {
-    public sealed class AccountInfoRequest : MihoyoRequest
+    public sealed class AccountInfoRequest : MihoyoHttpRequest
     {
         private static readonly string AccountInfoUrl = "https://api-os-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie";
 
