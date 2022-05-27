@@ -9,7 +9,7 @@ namespace GenshinCheckIn
             BuildLogger();
             Log.Information("Starting a Genshin Impact auto daily check-in tool...");
 
-            new DailyCheckIn().Run();
+            AutoDailyCheckIn.Run();
         }
 
         private static void BuildLogger()
